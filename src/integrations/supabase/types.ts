@@ -14,7 +14,152 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          twitter_connected: boolean | null
+          twitter_username: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          twitter_connected?: boolean | null
+          twitter_username?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          twitter_connected?: boolean | null
+          twitter_username?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      scheduling_queue: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          processed: boolean | null
+          processed_at: string | null
+          scheduled_for: string
+          tweet_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          processed?: boolean | null
+          processed_at?: string | null
+          scheduled_for: string
+          tweet_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          processed?: boolean | null
+          processed_at?: string | null
+          scheduled_for?: string
+          tweet_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scheduling_queue_tweet_id_fkey"
+            columns: ["tweet_id"]
+            isOneToOne: false
+            referencedRelation: "tweets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tweets: {
+        Row: {
+          content: string
+          created_at: string
+          engagement_stats: Json | null
+          hashtags: string[] | null
+          id: string
+          posted_at: string | null
+          scheduled_for: string | null
+          status: string | null
+          twitter_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          engagement_stats?: Json | null
+          hashtags?: string[] | null
+          id?: string
+          posted_at?: string | null
+          scheduled_for?: string | null
+          status?: string | null
+          twitter_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          engagement_stats?: Json | null
+          hashtags?: string[] | null
+          id?: string
+          posted_at?: string | null
+          scheduled_for?: string | null
+          status?: string | null
+          twitter_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      twitter_tokens: {
+        Row: {
+          access_token: string
+          access_token_secret: string
+          created_at: string
+          id: string
+          twitter_user_id: string | null
+          twitter_username: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          access_token_secret: string
+          created_at?: string
+          id?: string
+          twitter_user_id?: string | null
+          twitter_username?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          access_token_secret?: string
+          created_at?: string
+          id?: string
+          twitter_user_id?: string | null
+          twitter_username?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
